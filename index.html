@@ -39,6 +39,13 @@
             color: #e74c3c;
             margin-top: 30px;
         }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #e79d3c;
+            margin-top: 15px;
+        }
     
         textarea {
             padding: 15px;
@@ -78,7 +85,7 @@
         #outputText {
             margin-top: 50px;
             font-size: 1.2em;
-            color: #1abc9c;
+            color: #1a96bc;
             white-space: pre-wrap;
             text-align: left;
         }
@@ -103,7 +110,7 @@
         }
     
         .untranslated {
-            color: rgb(88, 174, 202); /* Highlight color for untranslated words */
+            color: rgb(202, 88, 88); /* Highlight color for untranslated words */
         }
     
         /* Custom Text Label Style */
@@ -122,6 +129,7 @@
 <body>
     <div class="container">
         <h1>Mansory Translator</h1>
+        <h3>English - Mansory</h3>
 
         <textarea id="inputText" placeholder="Type something to translate."></textarea>
 
@@ -146,6 +154,55 @@
 
     <script>
         const wordDatabase = {
+                "falka": "town",
+                "halk": "quiet",
+                "fundo": "found",
+                "ódi": "old",
+                "kucs": "key",
+                "ásóka": "shovel",
+                "áskál": "digging",
+                "himké": "his",
+                "herké": "her",
+                "himka": "he",
+                "herka": "she",
+                "vondur": "wonder",
+                "zar": "lock",
+                "unzar": "unlock",
+                "nikto": "night",
+                "híden": "hidden",
+                "ajtka": "door",
+                "erdej": "woods",
+                "kövi": "next",
+                "findo": "find",
+                "longka": "long",
+                "szercs": "search",
+                "kertke": "garden",
+                "szövcsi": "friendly",
+                "lényke": "creature",
+                "diszkoverko": "discover",
+                "smol": "small",
+                "baska": "base",
+                "gigant": "giant",
+                "tri": "tree",
+                "kezkok": "hands",
+                "kezok": "hand",
+                "opka": "open",
+                "csukka": "close",
+                "magikál": "magical",
+                "virgák": "flowers",
+                "áska": "dig",
+                "da": "the",
+                "koskár": "basket",
+                "unko": "one",
+                "tunko": "two",
+                "thrinko": "three",
+                "frunko": "four",
+                "fivko": "five",
+                "siko": "six",
+                "sevko": "seven",
+                "eghtko": "eight",
+                "ninko": "nine",
+                "tenko": "ten",
                 "apko": "apple",
                 "silva": "plum",
                 "barkocka": "peach",
@@ -155,6 +212,8 @@
                 "malnako": "raspberry",
                 "ki": "out",
                 "együtke": "together",
+                "un": "my",
+                "hotel": "hotel",
                 "sheko": "her",
                 "himko": "him",
                 "neh": "don't",
@@ -203,6 +262,15 @@
                 "nomor": "no more",
                 "ména": "why",
                 "tsao": "hi",
+                "themikor": "when",
+                "dat": "that",
+                "samkor": "sometimes",
+                "bestcore": "greatest",
+                "adventúra": "adventure",
+                "adventúrka": "adventures",
+                "kezd": "begin",
+                "wit": "with",
+                "egyke": "single",
                 "mouzli": "cereal",
                 "souvi": "peace",
                 "mitu": "me too",
@@ -212,7 +280,7 @@
                 "basa": "boss",
                 "bizsu": "jewelry",
                 "haverko": "friend",
-                "haverkos": "friend",
+                "haverkos": "friends",
                 "nasi": "snack",
                 "bódog": "happy",
                 "parti": "party",

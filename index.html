@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mansory Translator - vegh#1821</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+    
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            flex-direction: column; /* Stacks the container and text vertically */
+        }
+    
+        .container {
+            text-align: center;
+            background-color: #34495e;
+            padding: 0 100px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 1500px;
+            height: 800px;
+            margin-bottom: 20px; /* Adds space below the container */
+        }
+    
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #e74c3c;
+            margin-top: 30px;
+        }
+    
+        textarea {
+            padding: 15px;
+            width: 90%;
+            margin-top: 75px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            outline: none;
+            resize: none;
+            height: 150px;
+        }
+    
+        button {
+            padding: 12px 25px;
+            margin-top: 10px;
+            font-size: 1.2em;
+            background-color: #e74c3c;
+            color: #ecf0f1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 200px;
+        }
+    
+        button:hover {
+            background-color: #9c2f23;
+        }
+    
+        h2 {
+            margin-top: 100px;
+            font-size: 1.8em;
+            color: #ecf0f1;
+        }
+    
+        #outputText {
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: #1abc9c;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+    
+        .copy-button {
+            margin-left: 20px;
+            background-color: white;
+            color: #2c3e50;
+            font-size: 1.5em;
+            width: 40px;
+            height: 47px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .copy-button:hover {
+            background-color: #b9bbbb;
+        }
+    
+        .untranslated {
+            color: rgb(88, 174, 202); /* Highlight color for untranslated words */
+        }
+    
+        /* Custom Text Label Style */
+        #historyText {
+            font-size: 1.5em;          /* Change the text size */
+            color: lightblue;          /* Change the text color */
+            margin: 20px 0;           /* Set margin (top and bottom) */
+            padding: 10px;            /* Set padding */
+            line-height: 1.6;         /* Set line height for better readability */
+            text-align: center;       /* Center the text */
+            width: 100%;              /* Allow the text label to take full width */
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Mansory Translator</h1>
+
+        <textarea id="inputText" placeholder="Type something to translate."></textarea>
+
+        <button id="translateButton">Translate to English</button>
+        <button id="revertButton">Translate to Mansory</button>
+
+        <h2>Output:</h2>
+        <div class="output-container" style="display: flex; align-items: center; justify-content: center;">
+            <p id="outputText">Your translated text will appear here. Press the button to translate.</p>
+            <button class="copy-button" id="copyButton">📋</button>
+        </div>
+    </div>
+
+    <div id="historyText">
+        Mansorian language was invented by Vegh, and soon got evolved by more and more people.<br> <!-- New line using <br> -->
+        Did you know, it is also known as Gatso language? "Gatso rar" means "Go forever".
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+    <script>
+        const wordDatabase = {
+                "sajtka": "cheese",
+                "botka": "stick",
+                "csoko": "chocolate",
+                "én": "i",
+                "foca": "football",
+                "kosaur": "basketball",
+                "keziboli": "handball",
+                "jatsik": "playing",
+                "mi": "us",
+                "veri": "very",
+                "tetszik": "like",
+                "teh": "you",
+                "tihéd": "your",
+                "szobda": "room",
+                "bemutatka": "introduce",
+                "manap": "today",
+                "naice": "nice",
+                "gud": "good",
+                "englishko": "english",
+                "translato": "translate",
+                "gatso": "go",
+                "csumeszko": "welcome",
+                "ecu": "brother",
+                "eco": "money",
+                "fud": "food",
+                "sipsz": "chips",
+                "rar": "forever",
+                "nomor": "no more",
+                "ména": "why",
+                "tsao": "hi",
+                "mouzli": "cereal",
+                "souvi": "peace",
+                "mitu": "me too",
+                "mozi": "movie",
+                "slep": "sleep",
+                "vaib": "vibe",
+                "basa": "boss",
+                "bizsu": "jewelry",
+                "haverko": "friend",
+                "fudi": "snack",
+                "bódog": "happy",
+                "parti": "party",
+                "skéla": "skill",
+                "gepi": "computer",
+                "pando": "hug",
+                "csati": "channel",
+                "fensi": "fancy",
+                "bodi": "body",
+                "zum": "zoom",
+                "digal": "digital",
+                "diszko": "disco",
+                "klub": "club",
+                "boli": "ball",
+                "drim": "dream",
+                "kontra": "against",
+                "vadi": "new",
+                "konsitsu": "conscious",
+                "taim": "time",
+                "dubli": "double",
+                "zummi": "drink",
+                "kult": "cool",
+                "diffo": "different",
+                "unnon": "strange",
+                "ouveg": "glass",
+                "draive": "drive",
+                "méro": "where",
+                "jumpi": "jump",
+                "fessti": "fast",
+                "latso": "late",
+                "smort": "smart",
+                "fadj": "frost",
+                "szpész": "space",
+                "kreppó": "creepy",
+                "dzsungli": "jungle",
+                "sloffi": "slow",
+                "grandi": "big",
+                "pauz": "pause",
+                "redy": "ready",
+                "lufi": "balloon",
+                "rudi": "chocolate coated cottage cheese stick",
+                "tavi": "lake",
+                "lámpi": "lamp",
+                "szunji": "nap",
+                "kave": "coffee",
+                "pitza": "pizza",
+                "kotsi": "car",
+                "hólinap": "holiday",
+                "napko": "day",
+                "napotska": "sun",
+                "cica": "cat",
+                "kutyuli": "dog",
+                "fürd": "bath",
+                "haus": "house",
+                "van": "have",
+                "zaj": "sound",
+                "bizto": "safe",
+                "lopp": "steal",
+                "ünni": "celebrate",
+                "kompa": "company",
+                "duci": "chubby",
+                "keub": "cube",
+                "zsepi": "tissue",
+                "pósta": "mail",
+                "jaeg": "ice",
+                "píro": "red",
+                "keblu": "blue",
+                "saga": "yellow",
+                "zöd": "green",
+                "fekte": "black",
+                "feher": "white",
+                "zürk": "gray",
+                "bravn": "brown",
+                "norrints": "orange",
+                "lill": "purple",
+                "roz": "pink",
+                "hetfe": "monday",
+                "kedi": "tuesday",
+                "szerd": "wednesday",
+                "csüti": "thursday",
+                "pentke": "friday",
+                "szombta": "saturday",
+                "sundta": "sunday",
+                "blömbi": "blimp",
+                "süti": "cake",
+                "jog": "permission",
+                "shil": "chilly",
+                "melge": "warmy",
+                "tavázi": "spring",
+                "njar": "summer",
+                "aus": "autumn",
+                "vintél": "winter",
+                "napsuti": "sunshine",
+                "felhuf": "cloud",
+                "tsillag": "star",
+                "napszet": "sunset",
+                "volág": "worldl",
+                "sportos": "sporty",
+                "suli": "school",
+                "tanra": "teacher",
+                "láncka": "girl",
+                "fiutska": "boy",
+                "rohanás": "rush",
+                "tanuler": "learner",
+                "látás": "sight",
+                "hallás": "hearing",
+                "érzés": "feeling",
+                "szeret": "love",
+                "nevet": "laugh",
+                "síráz": "crying",
+                "álomk": "dreamy",
+                "valság": "reality",
+                "történyeta": "story",
+                "képli": "pictur",
+                "zene": "song",
+                "dans": "dance",
+                "tömeg": "crowdy",
+                "seinez": "coloring",
+                "edesko": "sweetie",
+                "saus": "salty",
+                "keser": "bitty",
+                "savany": "soury",
+        };
+
+        function translateToEnglish(text) {
+    return translate(text, wordDatabase);
+}
+
+function translateToEnglish(text) {
+    return translate(text, wordDatabase);
+}
+
+function translateToGatso(text) {
+    const reversedDatabase = Object.fromEntries(
+        Object.entries(wordDatabase).map(([key, value]) => [value, key])
+    );
+    return translate(text, reversedDatabase);
+}
+
+function translate(text, database) {
+    const words = text.split(/(\s+|[.,;?!])/); // Split by word boundaries and keep punctuation
+    const translatedWords = words.map(word => {
+        const translated = database[word.toLowerCase()];
+        if (translated !== undefined) {
+            return translated; // Return translated word
+        } else if (word.trim() === '') {
+            return word; // Return whitespace
+        } else {
+            return `<span class="untranslated">${word}</span>`; // Highlight untranslated words with class
+        }
+    });
+    return translatedWords.join('');
+}
+
+document.getElementById('translateButton').addEventListener('click', () => {
+    const inputText = document.getElementById('inputText').value;
+    const translatedText = translateToEnglish(inputText);
+    document.getElementById('outputText').innerHTML = translatedText; // Use innerHTML to render spans
+});
+
+document.getElementById('revertButton').addEventListener('click', () => {
+    const inputText = document.getElementById('inputText').value;
+    const revertedText = translateToGatso(inputText);
+    document.getElementById('outputText').innerHTML = revertedText; // Use innerHTML to render spans
+});
+
+document.getElementById('copyButton').addEventListener('click', () => {
+    const outputText = document.getElementById('outputText').innerHTML
+        .replace(/<[^>]*>/g, ''); // Remove HTML tags for copying
+    navigator.clipboard.writeText(outputText).then(() => {
+        alert('Copied to clipboard!');
+    });
+});
+</script>
+</body>
+</html>
